@@ -1,17 +1,18 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useFetchMovies } from '../../hooks/fetchMovies'
-import { Box, Image, Loader, Stack, Title } from '@mantine/core'
+import { Badge, Box, Button, Group, Image, Loader, Stack, Text, Title } from '@mantine/core'
 import { useState } from 'react'
 import { Carousel } from '@mantine/carousel';
 import { addMovieImage } from '../../utils/util';
-import MovieCard from '../MovieCard';
 import { useStyles } from './styles';
+import { IconPlayerPlay } from '@tabler/icons-react';
 
 const Hero = () => {
   const { isLoading, isFetching, data, isError, isSuccess } = useFetchMovies("now_playing")
   const movies = data ? addMovieImage(data) : []
   const [selectedMovie, setSelectedMovie] = useState<Movie | undefined>()
   const { classes } = useStyles()
+  const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
     if(isSuccess && movies?.length) {
@@ -20,7 +21,7 @@ const Hero = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess])
 
-  const [fadeOut, setFadeOut] = useState(false);
+  const releaseYear = selectedMovie?.release_date.split("-")[0]
 
   const handleImageClick = (movie: Movie) => {
     setFadeOut(true);
@@ -56,6 +57,28 @@ const Hero = () => {
         height="500" 
         radius="lg"
       />
+      <Stack 
+        spacing="lg" 
+        pos="absolute" 
+        top="0" 
+        left="50" 
+        mt="4rem"
+        w="40%"
+        className={`${classes.titleContainer} ${fadeOut ? classes.fadeOut : classes.fadeIn}`}
+        >
+        <Title order={1}>{selectedMovie?.title}</Title>
+        <Group spacing="sm">
+          <Text>{releaseYear}</Text>
+          <Badge size="lg" radius="sm" color='purple.1'>{selectedMovie?.vote_average}</Badge>
+        </Group>
+        <Group>
+          { selectedMovie?.genre_ids.map(genre => (
+            <Text>{genre}</Text>
+          ))}
+        </Group>
+        <Text lineClamp={2}>{selectedMovie?.overview}</Text>
+        <Button radius="md" w="50%" leftIcon={<IconPlayerPlay />} color="primary">Watch Now</Button>
+      </Stack>
       <Carousel
         className={classes.carousel}
         draggable

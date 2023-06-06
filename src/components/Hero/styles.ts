@@ -7,7 +7,7 @@ export const useStyles = createStyles((theme: MantineTheme) => ({
   },
   img: {
     cursor: "pointer",
-    filter: "brightness(50%)",
+    filter: "brightness(40%)",
   },
 
   imgSelected: {
@@ -15,7 +15,7 @@ export const useStyles = createStyles((theme: MantineTheme) => ({
     filter: "brightness(100%)", 
   },
   heroImg: {
-    filter: "brightness(65%)",
+    filter: "brightness(50%)",
     opacity: 0,
     transition: 'opacity .2s ease-in-out'
   },
@@ -24,6 +24,11 @@ export const useStyles = createStyles((theme: MantineTheme) => ({
   },
   fadeIn: {
     opacity: 1,
+  },
+
+  titleContainer: {
+    opacity: 0,
+    transition: 'opacity .2s ease-in-out'
   },
 
   carousel: {
