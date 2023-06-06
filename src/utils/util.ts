@@ -21,3 +21,7 @@ export const addMovieImage = <T extends Movie[] | Movie | undefined>(movie: T): 
   return undefined as T
   
 }
+
+export const getReleaseYear = (movie: Movie | undefined) => {
+  return movie && movie.release_date.split("-")[0]
+}

@@ -1,10 +1,15 @@
-import React from 'react'
+import { FC } from 'react'
+import { Path, useLocation } from 'react-router-dom';
 
-type Props = unknown
+interface Location extends Path {
+  state: Movie;
+}
 
-const MovieDetailsPage = (props: Props) => {
+const MovieDetailsPage: FC = () => {
+  const { state: movie }: Location = useLocation();
+
   return (
-    <div>MovieDetailsPage</div>
+    <div>{movie.title}</div>
   )
 }
 

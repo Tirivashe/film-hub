@@ -3,7 +3,7 @@ import { useFetchGenres, useFetchMovies } from '../../hooks/fetchMovies'
 import { Badge, Box, Button, Group, Image, Loader, Stack, Text, Title } from '@mantine/core'
 import { useState } from 'react'
 import { Carousel } from '@mantine/carousel';
-import { addMovieImage } from '../../utils/util';
+import { addMovieImage, getReleaseYear } from '../../utils/util';
 import { useStyles } from './styles';
 import { IconPlayerPlay } from '@tabler/icons-react';
 import { Link } from "react-router-dom"
@@ -23,7 +23,7 @@ const Hero = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess])
 
-  const releaseYear = selectedMovie?.release_date.split("-")[0]
+  const releaseYear = getReleaseYear(selectedMovie)
 
   const handleImageClick = (movie: Movie) => {
     setFadeOut(true);

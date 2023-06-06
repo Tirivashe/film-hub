@@ -44,12 +44,12 @@ const Dashboard = () => {
     )
   }
   return (
-    <Stack w="100%" p="md" className={classes.root}>
+    <Stack w="100%" spacing="xl" p="md" className={classes.root}>
       <Hero />
-      {/* <MovieList title="Weekly Trending Movies" movies={trendingMovies}/>
+      <MovieList title="Weekly Trending Movies" movies={trendingMovies}/>
       <MovieList title="Popular Movies" movies={popularMovies}/>
       <MovieList title="Upcoming Movies" movies={upcomingMovies}/>
-      <MovieList title="Top Rated Movies" movies={topRatedMovies}/> */}
+      <MovieList title="Top Rated Movies" movies={topRatedMovies}/>
     </Stack>
   )
 }

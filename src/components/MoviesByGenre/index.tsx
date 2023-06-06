@@ -25,7 +25,7 @@ const MoviesByGenre = () => {
     <Stack>
       <Title>All {genre} Movies</Title>
       {data?.map(movie => (
-        <p>{movie.title}</p>
+        <p key={movie.id}>{movie.title}</p>
       )) }
     </Stack>
   )
