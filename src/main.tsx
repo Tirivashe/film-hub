@@ -21,7 +21,7 @@ const theme: MantineThemeOverride = {
     purple: ["#F2EAFF", "#E0CFFF", "#BD9CFF", "#8C52FF", "#7937FE", "#6519FE", "#5C09FF", "#4C00E4", "#4300CC", "#3700B4"],
   },
   primaryColor: 'purple',
-  primaryShade: 4
+  primaryShade: 7
 }
 
 const router = createBrowserRouter([

@@ -17,7 +17,7 @@ export const useStyles = createStyles((theme: MantineTheme) => ({
   heroImg: {
     filter: "brightness(50%)",
     opacity: 0,
-    transition: 'opacity .2s ease-in-out'
+    transition: 'opacity .15s ease-in-out'
   },
   fadeOut: {
     opacity: 0,
@@ -28,7 +28,7 @@ export const useStyles = createStyles((theme: MantineTheme) => ({
 
   titleContainer: {
     opacity: 0,
-    transition: 'opacity .2s ease-in-out'
+    transition: 'opacity .15s ease-in-out'
   },
 
   carousel: {
@@ -37,6 +37,13 @@ export const useStyles = createStyles((theme: MantineTheme) => ({
     right: 0,
     bottom: 10,
     width: "30%",
+    "@media (max-width: 1000px)": {
+      width: "50%"
+    },
+
+    "@media (max-width: 750px)": {
+      width: "100%"
+    }
   },
   slide: {
     borderRadius: theme.radius.md

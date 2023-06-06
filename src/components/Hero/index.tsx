@@ -1,14 +1,16 @@
 import { useEffect } from 'react'
-import { useFetchMovies } from '../../hooks/fetchMovies'
+import { useFetchGenres, useFetchMovies } from '../../hooks/fetchMovies'
 import { Badge, Box, Button, Group, Image, Loader, Stack, Text, Title } from '@mantine/core'
 import { useState } from 'react'
 import { Carousel } from '@mantine/carousel';
 import { addMovieImage } from '../../utils/util';
 import { useStyles } from './styles';
 import { IconPlayerPlay } from '@tabler/icons-react';
+import { Link } from "react-router-dom"
 
 const Hero = () => {
   const { isLoading, isFetching, data, isError, isSuccess } = useFetchMovies("now_playing")
+  const { data: allGenres } = useFetchGenres()
   const movies = data ? addMovieImage(data) : []
   const [selectedMovie, setSelectedMovie] = useState<Movie | undefined>()
   const { classes } = useStyles()
@@ -28,8 +30,14 @@ const Hero = () => {
     setTimeout(() => {
       setSelectedMovie(movie);
       setFadeOut(false);
-    }, 200);
+    }, 150);
   };
+
+  function getGenreNames(allGenres: Genre[] | undefined, movieGenreIds: number[] | undefined) {
+    return allGenres && movieGenreIds && allGenres.filter(({id}) => movieGenreIds.includes(Number(id))).map(({name}) => name);
+  }
+
+  const genres = getGenreNames(allGenres, selectedMovie?.genre_ids)
 
   if(isLoading || isFetching) {
     return (
@@ -72,12 +80,20 @@ const Hero = () => {
           <Badge size="lg" radius="sm" color='purple.1'>{selectedMovie?.vote_average}</Badge>
         </Group>
         <Group>
-          { selectedMovie?.genre_ids.map(genre => (
-            <Text>{genre}</Text>
-          ))}
+          { genres?.join(", ")}
         </Group>
         <Text lineClamp={2}>{selectedMovie?.overview}</Text>
-        <Button radius="md" w="50%" leftIcon={<IconPlayerPlay />} color="primary">Watch Now</Button>
+        <Button 
+          component={Link} 
+          to={`/movie/${selectedMovie?.id}`} 
+          state={selectedMovie} 
+          radius="md" 
+          w="50%" 
+          leftIcon={<IconPlayerPlay />} 
+          color="primary"
+          >
+            Watch Now
+        </Button>
       </Stack>
       <Carousel
         className={classes.carousel}
