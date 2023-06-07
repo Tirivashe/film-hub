@@ -7,6 +7,7 @@ const Navbar = () => {
   const { classes } = useStyles()
   const setGenre = useStore(state => state.setGenre)
   const openGenres = useStore(state => state.openGenres)
+  const open = useStore(state => state.isNavOpen)
 
   const showMoviesInGenre = (genreId: string, genre: string) => {
     setGenre(genreId, genre)
@@ -18,7 +19,7 @@ const Navbar = () => {
     )
   }
   return (
-    <MantineNavbar fixed withBorder={false} width={{ base: 200 }}>
+    <MantineNavbar fixed withBorder={false} width={{ base: 200 }} hidden={!open} hiddenBreakpoint="md">
       <Stack w="100%" mt="lg" pl="2rem" pb="sm" className={classes.stack}>
         <Title order={3}>Genres</Title>
         {data?.map(({ id, name }) => (

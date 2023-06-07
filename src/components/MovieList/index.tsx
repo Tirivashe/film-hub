@@ -26,6 +26,12 @@ const MovieList: FC<Props> = ({ title, movies }) => {
         slideGap="md"
         containScroll='trimSnaps'
         slidesToScroll={1}
+        breakpoints={[
+          { maxWidth: 'lg', slideSize: '25%' },
+          { maxWidth: 'md', slideSize: '33.33333333333%' },
+          { maxWidth: 'sm', slideSize: '50%'},
+          { maxWidth: 'xs', slideSize: '100%'},
+        ]}
       >
         {movies?.map(movie => (
           <Carousel.Slide key={movie.id} onClick={() => goToDetails(movie)}>

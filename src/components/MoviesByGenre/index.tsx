@@ -25,7 +25,16 @@ const MoviesByGenre = () => {
   return (
     <Stack>
       <Title>All {genre} Movies</Title>
-      <SimpleGrid cols={5} spacing="md" verticalSpacing="xl">
+      <SimpleGrid 
+        cols={5} 
+        spacing="md" 
+        verticalSpacing="xl"
+        breakpoints={[
+          { maxWidth: "lg", cols: 3 },
+          { maxWidth: "md", cols: 2 },
+          { maxWidth: "xs", cols: 1 },
+        ]}
+      >
         { data?.pages?.map(page => page.results.map(movie => (
           <MovieCard movie={addMovieImage(movie)}/>
         ))) }

@@ -13,6 +13,7 @@ export const HomePage: FC = () => {
     <AppShell
       navbar={<Navbar />}
       header={<Header />}
+      navbarOffsetBreakpoint="md"
     >
       {isGenresOpen ? <MoviesByGenre /> : <Dashboard />}
     </AppShell>
