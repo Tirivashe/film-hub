@@ -1,4 +1,4 @@
-import { Navbar as MantineNavbar, Stack, Title, Loader, Text } from "@mantine/core"
+import { Navbar as MantineNavbar, Stack, Title, Text } from "@mantine/core"
 import { useFetchGenres } from "../../hooks/fetchMovies"
 import { useStyles } from "./styles"
 import { useStore } from "../../store"
