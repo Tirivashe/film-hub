@@ -1,7 +1,7 @@
 import { Carousel } from '@mantine/carousel'
 import { Badge, Group, Image, Stack, Text, Title } from '@mantine/core'
 import { FC } from 'react'
-import { addMovieImage, getReleaseYear } from '../../utils/util'
+import { getReleaseYear } from '../../utils/util'
 import { IconStarFilled } from '@tabler/icons-react'
 import { useNavigate } from 'react-router-dom'
 
@@ -10,8 +10,7 @@ type Props = {
   movies: Movie[] | undefined
 }
 
-const MovieList: FC<Props> = ({ title, movies: baseMovies }) => {
-  const movies = addMovieImage(baseMovies)
+const MovieList: FC<Props> = ({ title, movies }) => {
   const navigate = useNavigate()
   const goToDetails = (movie: Movie) => {
     navigate(`/movie/${movie.id}`, { state: movie })

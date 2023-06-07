@@ -3,15 +3,14 @@ import { useFetchGenres, useFetchMovies } from '../../hooks/fetchMovies'
 import { Badge, Box, Button, Group, Image, Loader, Stack, Text, Title } from '@mantine/core'
 import { useState } from 'react'
 import { Carousel } from '@mantine/carousel';
-import { addMovieImage, getReleaseYear } from '../../utils/util';
+import { getReleaseYear } from '../../utils/util';
 import { useStyles } from './styles';
 import { IconPlayerPlay } from '@tabler/icons-react';
 import { Link } from "react-router-dom"
 
 const Hero = () => {
-  const { isLoading, isFetching, data, isError, isSuccess } = useFetchMovies("now_playing")
+  const { isLoading, isFetching, data: movies, isError, isSuccess } = useFetchMovies("now_playing")
   const { data: allGenres } = useFetchGenres()
-  const movies = data ? addMovieImage(data) : []
   const [selectedMovie, setSelectedMovie] = useState<Movie | undefined>()
   const { classes } = useStyles()
   const [fadeOut, setFadeOut] = useState(false);
