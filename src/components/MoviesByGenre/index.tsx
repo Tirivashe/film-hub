@@ -1,4 +1,3 @@
-import React from 'react'
 import { useFetchMoviesByGenres } from '../../hooks/fetchMovies'
 import { useStore } from '../../store'
 import { Loader, SimpleGrid, Stack, Title } from '@mantine/core'
