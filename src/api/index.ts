@@ -13,7 +13,7 @@ export const fetchMovieGenres = async () => {
 
 export const fetchMoviesByGenre = async (genre: string, page = 1) => {
   return axiosInstance.get<ResultRootObject>(`/discover/movie?language=en-US&page=${page}&with_genres=${genre}`)
-  .then(res => addMovieImage(res.data.results))
+  .then(res => res.data)
 }
 
 export const fetchTrendingMovies = async () => {

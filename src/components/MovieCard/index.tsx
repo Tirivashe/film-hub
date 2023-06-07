@@ -5,23 +5,25 @@ import { getReleaseYear } from '../../utils/util'
 import { useNavigate } from 'react-router-dom'
 
 type Props = {
-  movie: Movie
+  movie: Movie,
+  disableClick?: boolean
 }
 
-const MovieCard: FC<Props> = ({ movie }) => {
+const MovieCard: FC<Props> = ({ movie, disableClick = false }) => {
   const navigate = useNavigate()
   const goToDetails = (movie: Movie) => {
-    navigate(`/movie/${movie.id}`, { state: movie })
+    !disableClick && navigate(`/movie/${movie.id}`, { state: movie })
   }
   return (
     <Stack spacing="0" style={{ cursor: "pointer" }} onClick={() => goToDetails(movie)}>
       <Image 
         src={movie.poster_path} 
         width="100%"
+        height="300"
         radius="lg" 
         alt='image' 
         fit="cover"
-        onLoad={() =>console.log(`${movie.title} image loaded`)}
+        withPlaceholder 
       />
       <Stack w="100%" spacing="xs" px="xs">
         <Title lineClamp={1} order={5} mt="xs">{movie.title}</Title>

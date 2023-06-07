@@ -3,7 +3,7 @@ import { useFetchGenres } from "../../hooks/fetchMovies"
 import { useStyles } from "./styles"
 import { useStore } from "../../store"
 const Navbar = () => {
-  const { isLoading, isFetching, isError, data } = useFetchGenres()
+  const { isError, data } = useFetchGenres()
   const { classes } = useStyles()
   const setGenre = useStore(state => state.setGenre)
   const openGenres = useStore(state => state.openGenres)
@@ -12,15 +12,6 @@ const Navbar = () => {
     setGenre(genreId, genre)
     openGenres()
   } 
-
-
-  if(isLoading || isFetching) {
-    return (
-    <Stack justify='center' align='center' w="100%" h="100vh">
-      <Loader />
-    </Stack>
-    )
-  }
   if(isError) {
     return (
       <Title>Oops, there has been an error</Title>

@@ -2,6 +2,7 @@ import { Carousel } from '@mantine/carousel'
 import { Stack, Title } from '@mantine/core'
 import { FC } from 'react'
 import MovieCard from '../MovieCard'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {
   title: string,
@@ -9,7 +10,10 @@ type Props = {
 }
 
 const MovieList: FC<Props> = ({ title, movies }) => {
-
+  const navigate = useNavigate()
+  const goToDetails = (movie: Movie) => {
+    navigate(`/movie/${movie.id}`, { state: movie })
+  }
   return (
     <Stack spacing="md" mt="sm">
       <Title order={2}>{title}</Title>
@@ -24,8 +28,8 @@ const MovieList: FC<Props> = ({ title, movies }) => {
         slidesToScroll={1}
       >
         {movies?.map(movie => (
-          <Carousel.Slide key={movie.id}>
-            <MovieCard movie={movie}/>
+          <Carousel.Slide key={movie.id} onClick={() => goToDetails(movie)}>
+            <MovieCard movie={movie} disableClick={true}/>
           </Carousel.Slide>
         ))}
     </Carousel>
