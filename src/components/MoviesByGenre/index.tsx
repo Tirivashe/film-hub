@@ -1,7 +1,8 @@
 import React from 'react'
 import { useFetchMoviesByGenres } from '../../hooks/fetchMovies'
 import { useStore } from '../../store'
-import { Loader, Stack, Title } from '@mantine/core'
+import { Loader, SimpleGrid, Stack, Title } from '@mantine/core'
+import MovieCard from '../MovieCard'
 
 const MoviesByGenre = () => {
   const genreId = useStore(state => state.genreId)
@@ -24,9 +25,11 @@ const MoviesByGenre = () => {
   return (
     <Stack>
       <Title>All {genre} Movies</Title>
-      {data?.map(movie => (
-        <p key={movie.id}>{movie.title}</p>
-      )) }
+      <SimpleGrid cols={5} spacing="md" verticalSpacing="xl">
+        {data?.map(movie => (
+          <MovieCard movie={movie}/>
+        )) }
+      </SimpleGrid>
     </Stack>
   )
 }
