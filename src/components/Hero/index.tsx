@@ -99,7 +99,7 @@ const Hero = () => {
         draggable
         dragFree
         withControls={false}
-        height={150}
+        height={180}
         slideSize="33%"
         slideGap="sm"
         align="center"
@@ -110,7 +110,7 @@ const Hero = () => {
             <Image 
               src={movie.poster_path} 
               className={ selectedMovie?.id === movie.id ? classes.imgSelected : classes.img} 
-              height="120" 
+              height="150" 
               width="100%" 
               radius="lg" 
               alt='image' 

@@ -28,11 +28,11 @@ const MoviesByGenre = () => {
       <SimpleGrid 
         cols={5} 
         spacing="md" 
-        verticalSpacing="xl"
+        verticalSpacing="3rem"
         breakpoints={[
           { maxWidth: "lg", cols: 3 },
-          { maxWidth: "md", cols: 2 },
-          { maxWidth: "xs", cols: 1 },
+          { maxWidth: "md", cols: 2, verticalSpacing: "xl" },
+          { maxWidth: "xs", cols: 1, verticalSpacing: "lg" },
         ]}
       >
         { data?.pages?.map(page => page.results.map(movie => (

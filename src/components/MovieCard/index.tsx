@@ -1,4 +1,4 @@
-import { Badge, Group, Image, Stack, Text, Title } from '@mantine/core'
+import { Badge, Group, Image, Stack, Text, Title, Tooltip } from '@mantine/core'
 import { IconStarFilled } from '@tabler/icons-react'
 import { FC } from 'react'
 import { getReleaseYear } from '../../utils/util'
@@ -26,7 +26,9 @@ const MovieCard: FC<Props> = ({ movie, disableClick = false }) => {
         withPlaceholder 
       />
       <Stack w="100%" spacing="xs" px="xs">
-        <Title lineClamp={1} order={5} mt="xs">{movie.title}</Title>
+        <Tooltip label={movie.title} color='purple.6' openDelay={500} closeDelay={200}>
+          <Title lineClamp={1} order={4} mt="xs">{movie.title}</Title>
+        </Tooltip>
         <Group position='apart'>
           <Group spacing={"xs"}>
             <IconStarFilled style={{ color: "gold" }} size="1rem"/>
