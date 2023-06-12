@@ -34,7 +34,7 @@ interface Genre {
 interface MovieDetails {
   adult: boolean;
   backdrop_path: string;
-  belongs_to_collection?: any;
+  belongs_to_collection: Belongstocollection;
   budget: number;
   genres: Genre[];
   homepage: string;
@@ -57,6 +57,59 @@ interface MovieDetails {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  credits: Credits;
+  videos: Videos;
+}
+
+interface Videos {
+  results: Result[];
+}
+
+interface Result {
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  type: string;
+  official: boolean;
+  published_at: string;
+  id: string;
+}
+
+interface Credits {
+  cast: Cast[];
+  crew: Crew[];
+}
+
+interface Crew {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path?: string;
+  credit_id: string;
+  department: string;
+  job: string;
+}
+
+interface Cast {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path?: string;
+  cast_id: number;
+  character: string;
+  credit_id: string;
+  order: number;
 }
 
 interface Spokenlanguage {
@@ -75,4 +128,16 @@ interface Productioncompany {
   logo_path?: string;
   name: string;
   origin_country: string;
+}
+
+interface Genre {
+  id: number;
+  name: string;
+}
+
+interface Belongstocollection {
+  id: number;
+  name: string;
+  poster_path: string;
+  backdrop_path: string;
 }

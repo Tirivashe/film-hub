@@ -3,21 +3,20 @@ import { useFetchGenres } from "../../hooks/fetchMovies"
 import { useStyles } from "./styles"
 import { useStore } from "../../store"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 const Navbar = () => {
   const { isError, data } = useFetchGenres()
   const { classes } = useStyles()
-  const setGenre = useStore(state => state.setGenre)
-  const openGenres = useStore(state => state.openGenres)
   const toggleNav = useStore(state => state.toggleNav)
   const open = useStore(state => state.isNavOpen)
   const [active, setActive] = useState("")
+  const navigate = useNavigate()
 
 
-  const showMoviesInGenre = (genreId: string, genre: string) => {
+  const showMoviesInGenre = (genreId: string, genreName: string) => {
     setActive(genreId)
     toggleNav()
-    setGenre(genreId, genre)
-    openGenres()
+    navigate(`/genres/${genreId}`, { state: { genre: genreName }})
     window.scrollTo(0, 0)
   } 
   if(isError) {

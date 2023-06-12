@@ -6,11 +6,12 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import MovieDetailsPage from './pages/movie_details/index.tsx'
 import { MantineProvider, MantineThemeOverride } from '@mantine/core'
+import { MovieGenres } from './pages/movie_genres/index.tsx'
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60 * 60
+      staleTime: 1000 * 60 * 60 * 24 * 7
     }
   }
 })
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
+  },
+  {
+    path: "/genres/:id",
+    element: <MovieGenres />,
   },
   {
     path: "/movie/:id",

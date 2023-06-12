@@ -12,7 +12,7 @@ type Props = {
 const MovieCard: FC<Props> = ({ movie, disableClick = false }) => {
   const navigate = useNavigate()
   const goToDetails = (movie: Movie) => {
-    !disableClick && navigate(`/movie/${movie.id}`, { state: movie })
+    !disableClick && navigate(`/movie/${movie.id}`)
   }
   return (
     <Stack spacing="0" style={{ cursor: "pointer" }} onClick={() => goToDetails(movie)}>

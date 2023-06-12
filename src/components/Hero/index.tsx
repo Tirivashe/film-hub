@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import { useFetchGenres, useFetchMovies } from '../../hooks/fetchMovies'
-import { Badge, Box, Button, Group, Image, Loader, Stack, Text, Title } from '@mantine/core'
+import { BackgroundImage, Badge, Button, Group, Image, Loader, Stack, Text, Title } from '@mantine/core'
 import { useState } from 'react'
 import { Carousel } from '@mantine/carousel';
-import { getReleaseYear } from '../../utils/util';
+import { getGenreNames, getReleaseYear } from '../../utils/util';
 import { useStyles } from './styles';
-import { IconPlayerPlay } from '@tabler/icons-react';
+import { IconInfoCircle } from '@tabler/icons-react';
 import { Link } from "react-router-dom"
 
 const Hero = () => {
@@ -23,6 +23,7 @@ const Hero = () => {
   }, [isSuccess])
 
   const releaseYear = getReleaseYear(selectedMovie)
+  const genres = getGenreNames(allGenres, selectedMovie?.genre_ids)
 
   const handleImageClick = (movie: Movie) => {
     setFadeOut(true);
@@ -32,11 +33,6 @@ const Hero = () => {
     }, 150);
   };
 
-  function getGenreNames(allGenres: Genre[] | undefined, movieGenreIds: number[] | undefined) {
-    return allGenres && movieGenreIds && allGenres.filter(({id}) => movieGenreIds.includes(Number(id))).map(({name}) => name);
-  }
-
-  const genres = getGenreNames(allGenres, selectedMovie?.genre_ids)
 
   if(isLoading || isFetching) {
     return (
@@ -54,23 +50,11 @@ const Hero = () => {
   }
 
   return (
-    <Box className={classes.root}>
-      <Image
-        className={`${classes.heroImg} ${fadeOut ? classes.fadeOut : classes.fadeIn}`} 
-        src={selectedMovie?.backdrop_path} 
-        alt="image" 
-        fit="cover" 
-        withPlaceholder 
-        height="500" 
-        radius="lg"
-      />
+    <BackgroundImage src={`${selectedMovie ? selectedMovie?.backdrop_path : ""}`} className={`${classes.root} ${fadeOut ? classes.fadeOut : classes.fadeIn}`}>
       <Stack 
         spacing="lg" 
-        pos="absolute" 
-        top="0" 
-        left="50" 
-        mt="4rem"
-        w="40%"
+        pos="relative" 
+        m="4rem"
         className={`${classes.titleContainer} ${fadeOut ? classes.fadeOut : classes.fadeIn}`}
         >
         <Title order={1}>{selectedMovie?.title}</Title>
@@ -82,17 +66,18 @@ const Hero = () => {
           { genres?.join(", ")}
         </Group>
         <Text lineClamp={2}>{selectedMovie?.overview}</Text>
-        <Button 
-          component={Link} 
-          to={`/movie/${selectedMovie?.id}`} 
-          state={selectedMovie} 
-          radius="md" 
-          w="50%" 
-          leftIcon={<IconPlayerPlay />} 
-          color="primary"
-          >
-            Watch Now
-        </Button>
+        <Group align='center'>
+          <Button 
+            component={Link} 
+            to={`/movie/${selectedMovie?.id}`} 
+            state={selectedMovie} 
+            radius="md" 
+            leftIcon={<IconInfoCircle />} 
+            color="primary"
+            >
+              More Info
+          </Button>
+        </Group>
       </Stack>
       <Carousel
         className={classes.carousel}
@@ -118,8 +103,8 @@ const Hero = () => {
               />
           </Carousel.Slide>
         ))}
-    </Carousel>
-    </Box>
+      </Carousel>
+    </BackgroundImage>
   )
 }
 

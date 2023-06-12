@@ -1,12 +1,15 @@
 import { useFetchMoviesByGenres } from '../../hooks/fetchMovies'
-import { useStore } from '../../store'
 import { Button, Group, Loader, SimpleGrid, Stack, Title } from '@mantine/core'
 import MovieCard from '../MovieCard'
 import { addMovieImage } from '../../utils/util'
+import { FC } from 'react'
 
-const MoviesByGenre = () => {
-  const genreId = useStore(state => state.genreId)
-  const genre = useStore(state => state.genre)
+type Props = {
+  genreId: string | undefined,
+  genre: string
+}
+
+const MoviesByGenre: FC<Props> = ({ genreId, genre }) => {
   const { isLoading, isError, isFetching, fetchNextPage, hasNextPage, data, isFetchingNextPage } = useFetchMoviesByGenres(genreId)
   
   if((isLoading || isFetching) && !isFetchingNextPage) {

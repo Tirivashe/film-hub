@@ -11,12 +11,17 @@ export const fetchMovieGenres = async () => {
   .then(res => res.data.genres)
 }
 
-export const fetchMoviesByGenre = async (genre: string, page = 1) => {
+export const fetchMoviesByGenre = async (genre: string | undefined, page = 1) => {
   return axiosInstance.get<ResultRootObject>(`/discover/movie?language=en-US&page=${page}&with_genres=${genre}`)
   .then(res => res.data)
 }
 
 export const fetchTrendingMovies = async () => {
-  return axiosInstance.get<ResultRootObject>('/trending/movie/day?language=en-US')
+  return axiosInstance.get<ResultRootObject>('/trending/movie/week?language=en-US')
   .then(res => addMovieImage(res.data.results))
+}
+
+export const fetchMovieById = async (movieId: number) => {
+  return axiosInstance.get<MovieDetails>(`/movie/${movieId}?append_to_response=credits%2Cvideos&language=en-US`)
+  .then(res => addMovieImage(res.data))
 }
