@@ -99,6 +99,11 @@ const MovieDetailsPage: FC = () => {
                     align="center"
                     containScroll='trimSnaps'
                     pos="relative"
+                    breakpoints={[
+                      { maxWidth: 'lg', slideSize: "33.3333333333%" },
+                      { maxWidth: 'md', slideSize: "50%" },
+                      { maxWidth: 'xs', slideSize: "100%" }
+                    ]}
                   >
                     {movie?.videos?.results?.map(video => (
                       <Carousel.Slide key={video.id}>
