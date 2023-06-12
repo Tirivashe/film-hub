@@ -123,7 +123,7 @@ const MovieDetailsPage: FC = () => {
         </Grid>
       </BackgroundImage>
       <Space mt={"xl"}/>
-      <MovieList title='You May Also Like' movies={similarGenreMovies}/>
+      { similarGenreMovies.length > 0 && <MovieList title='You May Also Like' movies={similarGenreMovies}/>}
       <Group align='center' position='center'>
         <Button component={Link} to="/" mt="xl" color="primary">Back Home</Button>
       </Group>
