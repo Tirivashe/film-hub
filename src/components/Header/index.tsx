@@ -2,18 +2,17 @@ import { Burger, Group, Header as MantineHeader, MediaQuery, TextInput } from "@
 import { IconSearch } from "@tabler/icons-react"
 import { useStyles } from "./styles"
 import { useStore } from "../../store"
-//import Logo from "../Logo"
+// import Logo from "../Logo"
+import { useNavigate } from "react-router-dom"
 
 const Header = () => {
   const { classes } = useStyles()
-  const resetGenre = useStore(state => state.resetGenre)
-  const closeGenres = useStore(state => state.closeGenres)
   const isNavOpen = useStore(state => state.isNavOpen)
   const toggleNav = useStore(state => state.toggleNav)
+  const navigate = useNavigate()
 
   const showDashboard = () => {
-    resetGenre()
-    closeGenres()
+    navigate('/')
   }
 
   return (
@@ -28,6 +27,7 @@ const Header = () => {
           />
         </MediaQuery>
         <MediaQuery smallerThan="md" styles={{ display: "none" }}>
+          {/* <Logo /> */}
           <div onClick={showDashboard}>Logo</div>
         </MediaQuery>
         <TextInput
