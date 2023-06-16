@@ -22,7 +22,11 @@ const theme: MantineThemeOverride = {
     purple: ["#F2EAFF", "#E0CFFF", "#BD9CFF", "#8C52FF", "#7937FE", "#6519FE", "#5C09FF", "#4C00E4", "#4300CC", "#3700B4"],
   },
   primaryColor: 'purple',
-  primaryShade: 7
+  primaryShade: 7,
+  headings: {
+    fontFamily: "Noto Sans"
+  },
+  fontFamily: "Nunito"
 }
 
 const router = createBrowserRouter([
@@ -42,11 +46,11 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <MantineProvider withNormalizeCSS withGlobalStyles theme={theme}>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <ReactQueryDevtools initialIsOpen={false} />
+        <MantineProvider withNormalizeCSS withGlobalStyles theme={theme}>
+          <RouterProvider router={router} />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </MantineProvider>
       </QueryClientProvider>
-    </MantineProvider>
   </React.StrictMode>,
 )

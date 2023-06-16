@@ -39,7 +39,7 @@ const MoviesByGenre: FC<Props> = ({ genreId, genre }) => {
         ]}
       >
         { data?.pages?.map(page => page.results.map(movie => (
-          <MovieCard movie={addMovieImage(movie)}/>
+          <MovieCard key={movie.id} movie={addMovieImage(movie)}/>
         ))) }
       </SimpleGrid>
       <Group position='center'>

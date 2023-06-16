@@ -25,3 +25,10 @@ export const fetchMovieById = async (movieId: number) => {
   return axiosInstance.get<MovieDetails>(`/movie/${movieId}?append_to_response=credits%2Cvideos&language=en-US`)
   .then(res => addMovieImage(res.data))
 }
+
+export const fetchMoviesBySearch = async (query: string | undefined, page = 1, signal: AbortSignal | undefined) => {
+  return axiosInstance.get<ResultRootObject>(`/search/movie?query=${query}&language=en-US&page=${page}`, {
+    signal
+  })
+  .then(res => res.data)
+}
