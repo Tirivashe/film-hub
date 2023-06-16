@@ -1,6 +1,6 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios"
-import { fetchMovies, fetchMovieGenres, fetchMoviesByGenre, fetchTrendingMovies, fetchMovieById } from "../api";
+import { fetchMovies, fetchMovieGenres, fetchMoviesByGenre, fetchTrendingMovies, fetchMovieById, fetchMoviesBySearch } from "../api";
 
 export function useFetchMovies(param: string) {
   const { isLoading, isFetching, data, isError, isSuccess } = useQuery<Movie[], AxiosError>({ 
@@ -49,4 +49,16 @@ export function useFetchMovieById(movieId: number) {
   })
 
   return { isLoading, isError, isFetching, data, isSuccess }
+}
+
+export function useFetchMoviesBySearch(query: string | undefined) {
+  const { isLoading, isFetching, data, isError, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery<ResultRootObject, AxiosError>({ 
+    queryKey: ['movies', "search", query], 
+    queryFn: ({ pageParam = 1, signal }) => fetchMoviesBySearch(query, pageParam, signal),
+    getNextPageParam: (result) => result.page < result.total_pages ? result.page + 1 : undefined,
+    keepPreviousData: true,
+    enabled: !!query
+  })
+
+  return { isLoading, isError, isFetching, fetchNextPage, hasNextPage, isFetchingNextPage, data }
 }

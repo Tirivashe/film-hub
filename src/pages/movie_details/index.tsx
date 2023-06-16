@@ -65,8 +65,8 @@ const MovieDetailsPage: FC = () => {
                 <Badge radius="md" color="primary">{movie?.status}</Badge>
               </Group>
               <Breadcrumbs separator="•">
-                {movieSubInfo.map(item => (
-                  <Text>{item.title}</Text>
+                {movieSubInfo.map((item, idx) => (
+                  <Text key={idx} >{item.title}</Text>
                 ))}
               </Breadcrumbs>
               <Text>
@@ -123,7 +123,7 @@ const MovieDetailsPage: FC = () => {
         </Grid>
       </BackgroundImage>
       <Space mt={"xl"}/>
-      { similarGenreMovies.length > 0 && <MovieList title='You May Also Like' movies={similarGenreMovies}/>}
+      { similarGenreMovies.length > 0 ? <MovieList title='You May Also Like' movies={similarGenreMovies}/> : <Loader variant='dots' />}
       <Group align='center' position='center'>
         <Button component={Link} to="/" mt="xl" color="primary">Back Home</Button>
       </Group>

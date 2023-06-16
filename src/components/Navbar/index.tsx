@@ -11,9 +11,11 @@ const Navbar = () => {
   const open = useStore(state => state.isNavOpen)
   const [active, setActive] = useState("")
   const navigate = useNavigate()
+  const clearQuery = useStore(state => state.clearQuery)
 
 
   const showMoviesInGenre = (genreId: string, genreName: string) => {
+    clearQuery()
     setActive(genreId)
     toggleNav()
     navigate(`/genres/${genreId}`, { state: { genre: genreName }})
