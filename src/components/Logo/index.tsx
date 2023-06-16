@@ -1,4 +1,4 @@
-import logo from "/public/filmlogo.svg"
+import logo from "/public/filmhublogo.svg"
 import styles from "./logo.module.scss"
 
 const Logo = () => {
