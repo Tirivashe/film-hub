@@ -44,7 +44,7 @@ const Dashboard = () => {
     )
   }
   return (
-    <Stack w="100%" spacing="xl" p="md" className={classes.root}>
+    <Stack w="100%" spacing="xl" p="sm" className={classes.root}>
       <Hero />
       <MovieList title="Weekly Trending Movies" movies={trendingMovies}/>
       <MovieList title="Popular Movies" movies={popularMovies}/>
