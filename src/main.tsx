@@ -7,6 +7,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import MovieDetailsPage from './pages/movie_details/index.tsx'
 import { MantineProvider, MantineThemeOverride } from '@mantine/core'
 import { MovieGenres } from './pages/movie_genres/index.tsx'
+import { WelcomePage } from './pages/welcome/index.tsx'
+import { AuthPage } from './pages/auth/index.tsx'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,6 +32,14 @@ const theme: MantineThemeOverride = {
 }
 
 const router = createBrowserRouter([
+  {
+    path: "/welcome",
+    element: <WelcomePage />,
+  },
+  {
+    path: "/auth",
+    element: <AuthPage />,
+  },
   {
     path: "/",
     element: <HomePage />,
