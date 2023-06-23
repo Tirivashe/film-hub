@@ -56,7 +56,7 @@ export const WelcomePage: FC = () => {
             </Button>
           </Stack>
         </BackgroundImage>
-        <Stack my="6rem" justify="center" align="center" spacing="lg" sx={{ color: "white" }}>
+        <Stack py="6rem" justify="center" align="center" spacing="lg" sx={{ color: "white", borderBottom: "8px solid #232323" }}>
           <Title align="center" order={4} color="purple.5">All In One Spot</Title>
           <Title align="center" sx={{ fontSize: "3.5rem" }}>All The Movies You Love</Title>
           <Text size="lg" align="center">
@@ -64,43 +64,8 @@ export const WelcomePage: FC = () => {
             family movies and more
           </Text>
         </Stack>
-        { !isError && (
-          <SimpleGrid 
-            cols={4}
-            spacing="xl"
-            px="sm"
-            breakpoints={[
-              { maxWidth: "xs", cols: 1 },
-              { maxWidth: "md", cols: 2 },
-            ]}>
-              <BackgroundImage src={`${upcomingMovie?.poster_path}`} className={classes.moviePreview} component={Link} to="/auth">
-                <Stack pos="relative" sx={{ color: "white" }} mt="xl" ml="md" spacing="0.2rem">
-                  <Text size="sm">Rising Stars</Text>
-                  <Text size="1.4rem">Upcoming</Text>
-                </Stack>
-              </BackgroundImage>
-              <BackgroundImage src={`${popularMovie?.poster_path}`} className={classes.moviePreview} component={Link} to="/auth">
-                <Stack pos="relative" sx={{ color: "white" }} mt="xl" ml="md" spacing="0.2rem">
-                  <Text size="sm">Made Their Name</Text>
-                  <Text size="1.4rem">Popular</Text>
-                </Stack>
-              </BackgroundImage>
-              <BackgroundImage src={`${trendingMovie?.poster_path}`} className={classes.moviePreview} component={Link} to="/auth">
-                <Stack pos="relative" sx={{ color: "white" }} mt="xl" ml="md" spacing="0.2rem">
-                  <Text size="sm">Making the rounds</Text>
-                  <Text size="1.4rem">Trending</Text>
-                </Stack>
-              </BackgroundImage>
-              <BackgroundImage src={`${topRatedMovie?.poster_path}`} className={classes.moviePreview} component={Link} to="/auth">
-                <Stack pos="relative" sx={{ color: "white" }} mt="xl" ml="md" spacing="0.2rem">
-                  <Text size="sm">The Classics</Text>
-                  <Text size="1.4rem">Top Rated</Text>
-                </Stack>
-              </BackgroundImage>
-          </SimpleGrid>
-        )}
         <SimpleGrid
-          sx={{ color: "white" }} 
+          sx={{ color: "white", borderBottom: "8px solid #232323" }} 
           cols={2} 
           py="13rem" 
           px="lg" 
@@ -114,6 +79,68 @@ export const WelcomePage: FC = () => {
           <Group position="center">
             <Image src="/public/images/couple.jpg" maw="500px" mah="300px"/>
           </Group>
+        </SimpleGrid>
+        { !isError && (
+          <>
+            <Stack py="6rem" justify="center" align="center" spacing="lg" sx={{ color: "white" }}>
+              <Title align="center" order={4} color="purple.5">All In One Spot</Title>
+              <Title align="center" sx={{ fontSize: "3.5rem" }}>The Film Hub Has It All</Title>
+              <Text size="lg" align="center">
+                Engage with more of your loved movies from all types of genres
+              </Text>
+            </Stack>
+            <SimpleGrid 
+              cols={4}
+              spacing="xl"
+              px="sm"
+              pb="3rem"
+              sx={{ borderBottom: "8px solid #232323" }}
+              breakpoints={[
+                { maxWidth: "xs", cols: 1 },
+                { maxWidth: "md", cols: 2 },
+              ]}>
+                <BackgroundImage src={`${upcomingMovie?.poster_path}`} className={classes.moviePreview} component={Link} to="/auth">
+                  <Stack pos="relative" sx={{ color: "white" }} mt="xl" ml="md" spacing="0.2rem">
+                    <Text size="sm">Rising Stars</Text>
+                    <Text size="1.4rem">Upcoming</Text>
+                  </Stack>
+                </BackgroundImage>
+                <BackgroundImage src={`${popularMovie?.poster_path}`} className={classes.moviePreview} component={Link} to="/auth">
+                  <Stack pos="relative" sx={{ color: "white" }} mt="xl" ml="md" spacing="0.2rem">
+                    <Text size="sm">Made Their Name</Text>
+                    <Text size="1.4rem">Popular</Text>
+                  </Stack>
+                </BackgroundImage>
+                <BackgroundImage src={`${trendingMovie?.poster_path}`} className={classes.moviePreview} component={Link} to="/auth">
+                  <Stack pos="relative" sx={{ color: "white" }} mt="xl" ml="md" spacing="0.2rem">
+                    <Text size="sm">Making the rounds</Text>
+                    <Text size="1.4rem">Trending</Text>
+                  </Stack>
+                </BackgroundImage>
+                <BackgroundImage src={`${topRatedMovie?.poster_path}`} className={classes.moviePreview} component={Link} to="/auth">
+                  <Stack pos="relative" sx={{ color: "white" }} mt="xl" ml="md" spacing="0.2rem">
+                    <Text size="sm">The Classics</Text>
+                    <Text size="1.4rem">Top Rated</Text>
+                  </Stack>
+                </BackgroundImage>
+            </SimpleGrid>
+          </>
+        )}
+        <SimpleGrid
+          sx={{ color: "white" }} 
+          cols={2} 
+          py="8rem" 
+          px="lg" 
+          breakpoints={[
+            { maxWidth: "md", cols: 1 }
+          ]}>
+          <Group position="center">
+            <Image src="/public/ethereum.svg" maw="100px" mah="200px"/>
+          </Group>
+          <Stack align="center" justify="center">
+            <Title align="center" order={1}>Buy Or Rent The Movie You Love</Title>
+            <Text align="center">Enjoy your favorite movies with ethereum, the secure and decentralized way to pay</Text>
+          </Stack>
         </SimpleGrid>
         <Stack justify="center" align="center" py="10rem" px="lg" sx={{ color: "white" }}>
           <Title align="center">Ready To Get Started?</Title>
