@@ -8,7 +8,8 @@ import MovieDetailsPage from './pages/movie_details/index.tsx'
 import { MantineProvider, MantineThemeOverride } from '@mantine/core'
 import { MovieGenres } from './pages/movie_genres/index.tsx'
 import { WelcomePage } from './pages/welcome/index.tsx'
-import { AuthPage } from './pages/auth/index.tsx'
+import { LoginPage } from './pages/login/index.tsx'
+import { SignupPage } from './pages/signup/index.tsx'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,8 +38,12 @@ const router = createBrowserRouter([
     element: <WelcomePage />,
   },
   {
-    path: "/auth",
-    element: <AuthPage />,
+    path: "/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/signup",
+    element: <SignupPage />,
   },
   {
     path: "/",
