@@ -31,7 +31,10 @@ export const WelcomePage: FC = () => {
             >
             Film Hub
           </Title>
-           <Button component={Link} to="/auth" size="md">Sign Up</Button>
+            <Group spacing="xl">
+              <Button component={Link} to="/login" size="md" color="purple.2" variant="outline">Log In</Button>
+              <Button component={Link} to="/signup" size="md">Sign Up</Button>
+            </Group>
           </Group>
           <Stack pos="relative" align="center" justify="center" spacing="sm">
             <Title align="center" order={3} variant="gradient" gradient={{ from: "purple.1", to: "purple.8", deg: 65 }}>The Film Hub</Title>
@@ -41,7 +44,7 @@ export const WelcomePage: FC = () => {
             <Title align="center" order={4}>Ready to watch? Discover your favorite movies and start browsing right now!</Title>
             <Button
               component={Link} 
-              to="/auth" 
+              to="/login" 
               rightIcon={<IconArrowRight />} 
               color="purple.5" 
               mt="lg" 
@@ -99,25 +102,25 @@ export const WelcomePage: FC = () => {
                 { maxWidth: "xs", cols: 1 },
                 { maxWidth: "md", cols: 2 },
               ]}>
-                <BackgroundImage src={`${upcomingMovie?.poster_path}`} className={classes.moviePreview} component={Link} to="/auth">
+                <BackgroundImage src={`${upcomingMovie?.poster_path}`} className={classes.moviePreview} component={Link} to="/login">
                   <Stack pos="relative" sx={{ color: "white" }} mt="xl" ml="md" spacing="0.2rem">
                     <Text size="sm">Rising Stars</Text>
                     <Text size="1.4rem">Upcoming</Text>
                   </Stack>
                 </BackgroundImage>
-                <BackgroundImage src={`${popularMovie?.poster_path}`} className={classes.moviePreview} component={Link} to="/auth">
+                <BackgroundImage src={`${popularMovie?.poster_path}`} className={classes.moviePreview} component={Link} to="/login">
                   <Stack pos="relative" sx={{ color: "white" }} mt="xl" ml="md" spacing="0.2rem">
                     <Text size="sm">Made Their Name</Text>
                     <Text size="1.4rem">Popular</Text>
                   </Stack>
                 </BackgroundImage>
-                <BackgroundImage src={`${trendingMovie?.poster_path}`} className={classes.moviePreview} component={Link} to="/auth">
+                <BackgroundImage src={`${trendingMovie?.poster_path}`} className={classes.moviePreview} component={Link} to="/login">
                   <Stack pos="relative" sx={{ color: "white" }} mt="xl" ml="md" spacing="0.2rem">
                     <Text size="sm">Making the rounds</Text>
                     <Text size="1.4rem">Trending</Text>
                   </Stack>
                 </BackgroundImage>
-                <BackgroundImage src={`${topRatedMovie?.poster_path}`} className={classes.moviePreview} component={Link} to="/auth">
+                <BackgroundImage src={`${topRatedMovie?.poster_path}`} className={classes.moviePreview} component={Link} to="/login">
                   <Stack pos="relative" sx={{ color: "white" }} mt="xl" ml="md" spacing="0.2rem">
                     <Text size="sm">The Classics</Text>
                     <Text size="1.4rem">Top Rated</Text>
@@ -145,7 +148,7 @@ export const WelcomePage: FC = () => {
         <Stack justify="center" align="center" py="10rem" px="lg" sx={{ color: "white" }}>
           <Title align="center">Ready To Get Started?</Title>
           <Text align="center">Start watching your favorite movies now!</Text>
-          <Button component={Link} to="/auth" rightIcon={<IconArrowRight />}>Get Started</Button>
+          <Button component={Link} to="/login" rightIcon={<IconArrowRight />}>Get Started</Button>
         </Stack>
       </>
   )
