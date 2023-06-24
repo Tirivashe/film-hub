@@ -1,12 +1,54 @@
 import { Box, Button, Divider, Flex, Group, Image, Paper, Text, TextInput, Title, useMantineTheme } from '@mantine/core'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { useStyles } from './signup.styles'
 import { IconBrandGoogle, IconInfoCircle } from '@tabler/icons-react'
 import { Link } from 'react-router-dom'
+import { supabase } from '../../api/supabase'
+import { AuthError } from '@supabase/supabase-js'
 
 export const SignupPage: FC = () => {
   const theme = useMantineTheme()
   const { classes } = useStyles()
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  })
+  const [error, setError] = useState<AuthError | null>(null)
+  const [loading, setLoading] = useState(false)
+
+  async function signInWithEmail(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setLoading(true)
+    try {
+      const { error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          emailRedirectTo: 'http://localhost:5173/login',
+        },
+      })
+      if(error) {
+        setError(error)
+        setLoading(false)
+        return
+      }
+      setLoading(false)
+      alert("Confirm your email address")
+      
+    } catch (err) {
+      setLoading(false)
+      alert(err)
+    }
+  }
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } =  event?.target as HTMLInputElement
+    setFormData({
+      ...formData,
+      [name]: value
+    })
+  }
+
   return (
     <Group spacing={0} h="100vh" grow position='center' align='center'>
       <Box className={classes.img}>
@@ -21,9 +63,10 @@ export const SignupPage: FC = () => {
           <Text align='center'>Sign up with Google Account you use daily</Text>
           <Button fullWidth my="lg" leftIcon={<IconBrandGoogle color='white'/>}>Continue With Google</Button>
           <Divider label="Or" labelPosition='center'/>
-          <form>
-            <TextInput required label="Email" placeholder='Enter your email address' type='email' variant='filled' pt="md" pb="lg" withAsterisk={false} />
-            <Button type='submit' fullWidth>Continue with email</Button>
+          <form onSubmit={signInWithEmail}>
+            <TextInput onChange={handleChange} name="email" required label="Email" placeholder='yourname@yourcompany.com' type='email' variant='filled' pt="md" pb="lg" withAsterisk={false} />
+            <TextInput error={error?.message} onChange={handleChange} name="password" required label="Password" placeholder='Enter your password' type='password' variant='filled' pb="lg" withAsterisk={false}/>
+            <Button type='submit' loading={loading} fullWidth>Continue With Email</Button>
           </form>
         </Paper>
         <Text py="md">Already have and account? <Text component={Link} to='/login' sx={{ color: theme.colors.purple[4], cursor: "pointer" }}>Log In</Text></Text>
