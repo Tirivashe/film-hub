@@ -1,10 +1,18 @@
-import { Navbar as MantineNavbar, Stack, Title, NavLink } from "@mantine/core"
+import { Navbar as MantineNavbar, Stack, Title, NavLink, Button } from "@mantine/core"
 import { useFetchGenres } from "../../hooks/fetchMovies"
 import { useStyles } from "./styles"
 import { useStore } from "../../store"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-const Navbar = () => {
+import { User } from "@supabase/supabase-js"
+import { FC } from "react"
+import { supabase } from "../../api/supabase"
+
+type Props = {
+  user: User | null
+}
+
+const Navbar: FC<Props> = ({ user }) => {
   const { isError, data } = useFetchGenres()
   const { classes } = useStyles()
   const toggleNav = useStore(state => state.toggleNav)
@@ -12,7 +20,17 @@ const Navbar = () => {
   const [active, setActive] = useState("")
   const navigate = useNavigate()
   const clearQuery = useStore(state => state.clearQuery)
+  const setToken = useStore(state => state.setToken)
 
+  const logOutUser = async () => {
+    try {
+      const { error } = await supabase.auth.signOut()
+      if(error) throw error
+      setToken(null)
+    } catch (err) {
+      alert(err)
+    }
+  }
 
   const showMoviesInGenre = (genreId: string, genreName: string) => {
     clearQuery()
@@ -41,6 +59,7 @@ const Navbar = () => {
             className={classes.text}
            />
         ))}
+        <Button onClick={logOutUser}>Log out</Button>
       </Stack>
     </MantineNavbar>
   )
