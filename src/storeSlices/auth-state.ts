@@ -3,8 +3,8 @@ import { ClientStateSlice } from "./client-state"
 import { persist } from "zustand/middleware"
 
 export interface AuthSlice {
-  token: string,
-  setToken: (token: string) => void
+  token: string | null,
+  setToken: (token: string | null) => void
 }
 
 export const createAuthSlice: StateCreator<
