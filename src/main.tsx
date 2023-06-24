@@ -10,6 +10,7 @@ import { MovieGenres } from './pages/movie_genres/index.tsx'
 import { WelcomePage } from './pages/welcome/index.tsx'
 import { LoginPage } from './pages/login/index.tsx'
 import { SignupPage } from './pages/signup/index.tsx'
+import ProtectedRoutes from './pages/protected.tsx'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -47,16 +48,22 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <HomePage />,
-  },
-  {
-    path: "/genres/:id",
-    element: <MovieGenres />,
-  },
-  {
-    path: "/movie/:id",
-    element: <MovieDetailsPage />,
-  },
+    element: <ProtectedRoutes />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: "/genres/:id",
+        element: <MovieGenres />,
+      },
+      {
+        path: "/movie/:id",
+        element: <MovieDetailsPage />,
+      },
+    ]
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
