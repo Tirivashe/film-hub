@@ -1,17 +1,9 @@
 import { create } from 'zustand'
+import { AuthSlice, createAuthSlice } from './storeSlices/auth-state'
+import { ClientStateSlice, createClientStateSlice } from './storeSlices/client-state'
 
-interface State {
-  isNavOpen: boolean,
-  query: string,
-  queryChange: (value: string) => void
-  clearQuery: () => void,
-  toggleNav: () => void
-}
 
-export const useStore = create<State>((set) => ({
-  isNavOpen: false,
-  query: "",
-  toggleNav: () => set(state => ({ isNavOpen: !state.isNavOpen })),
-  queryChange: value => set(() => ({ query: value })),
-  clearQuery: () => set(() => ({ query: "" }))
+export const useStore = create<AuthSlice & ClientStateSlice>()((...a) => ({
+  ...createAuthSlice(...a),
+  ...createClientStateSlice(...a)
 }))
