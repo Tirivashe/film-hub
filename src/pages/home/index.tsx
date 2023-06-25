@@ -1,5 +1,5 @@
 import { AppShell } from '@mantine/core'
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect } from 'react'
 import Dashboard from '../../components/Dashboard'
 import Header from '../../components/Header'
 import Navbar from '../../components/Navbar'
