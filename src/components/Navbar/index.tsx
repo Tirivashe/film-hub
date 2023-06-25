@@ -9,7 +9,7 @@ import { FC } from "react"
 import { LoggedInUser } from "../User"
 
 type Props = {
-  user: User | null
+  user?: User | null
 }
 
 const Navbar: FC<Props> = ({ user }) => {

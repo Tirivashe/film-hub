@@ -1,7 +1,7 @@
 import { Box, Button, Divider, Flex, Group, Image, Paper, Text, TextInput, Title, useMantineTheme } from '@mantine/core'
 import { FC, useState } from 'react'
 import { useStyles } from './signup.styles'
-import { IconBrandGoogle, IconCheck, IconInfoCircle } from '@tabler/icons-react'
+import { IconBrandGoogle, IconInfoCircle } from '@tabler/icons-react'
 import { Link } from 'react-router-dom'
 import { notifications } from '@mantine/notifications';
 import { supabase } from '../../api/supabase'

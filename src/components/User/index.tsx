@@ -6,7 +6,7 @@ import { supabase } from '../../api/supabase';
 import { useStore } from '../../store';
 
 type Props = {
-  user: User | null;
+  user?: User | null;
 }
 
 export const LoggedInUser:FC<Props> = ({ user }) => {
