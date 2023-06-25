@@ -10,6 +10,7 @@ export const SignupPage: FC = () => {
   const theme = useMantineTheme()
   const { classes } = useStyles()
   const [formData, setFormData] = useState({
+    fullName: '',
     email: '',
     password: ''
   })
@@ -25,6 +26,9 @@ export const SignupPage: FC = () => {
         password: formData.password,
         options: {
           emailRedirectTo: 'http://localhost:5173/login',
+          data: {
+            full_name: formData.fullName
+          }
         },
       })
       if(error) {
@@ -64,7 +68,8 @@ export const SignupPage: FC = () => {
           <Button fullWidth my="lg" leftIcon={<IconBrandGoogle color='white'/>}>Continue With Google</Button>
           <Divider label="Or" labelPosition='center'/>
           <form onSubmit={signInWithEmail}>
-            <TextInput onChange={handleChange} name="email" required label="Email" placeholder='yourname@yourcompany.com' type='email' variant='filled' pt="md" pb="lg" withAsterisk={false} />
+            <TextInput onChange={handleChange} name="fullName" required label="Full Name" placeholder='Enter your full name' variant='filled' pt="sm" pb="md" withAsterisk={false} />
+            <TextInput onChange={handleChange} name="email" required label="Email" placeholder='yourname@yourcompany.com' type='email' variant='filled' pb="md" withAsterisk={false} />
             <TextInput error={error?.message} onChange={handleChange} name="password" required label="Password" placeholder='Enter your password' type='password' variant='filled' pb="lg" withAsterisk={false}/>
             <Button type='submit' loading={loading} fullWidth>Continue With Email</Button>
           </form>
