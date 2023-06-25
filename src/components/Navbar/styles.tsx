@@ -5,7 +5,7 @@ export const useStyles = createStyles((theme: MantineTheme) => ({
     overflowY: "scroll",
     "::-webkit-scrollbar": {
       display: "none",
-      width: 5,
+      width: 3,
     },
 
     "&:hover": {
