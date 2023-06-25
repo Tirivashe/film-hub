@@ -11,6 +11,7 @@ import { WelcomePage } from './pages/welcome/index.tsx'
 import { LoginPage } from './pages/login/index.tsx'
 import { SignupPage } from './pages/signup/index.tsx'
 import ProtectedRoutes from './pages/protected.tsx'
+import { RootLayout } from './pages/layout.tsx'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -51,12 +52,17 @@ const router = createBrowserRouter([
     element: <ProtectedRoutes />,
     children: [
       {
-        index: true,
-        element: <HomePage />,
-      },
-      {
-        path: "/genres/:id",
-        element: <MovieGenres />,
+        element: <RootLayout />,
+        children: [
+          {
+            index: true,
+            element: <HomePage />,
+          },
+          {
+            path: "/genres/:id",
+            element: <MovieGenres />,
+          },
+        ]
       },
       {
         path: "/movie/:id",
