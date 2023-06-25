@@ -84,7 +84,7 @@ export const SignupPage: FC = () => {
   return (
     <Group spacing={0} h="100vh" grow position='center' align='center'>
       <Box className={classes.img}>
-        <Image src="/public/images/move_wallpaper.jpg" height="100vh" alt="img"/>
+        <Image src="/images/move_wallpaper.jpg" height="100vh" alt="img"/>
       </Box>
       <Flex justify="center" align="center" direction="column">
         <Paper shadow='xl' radius="md" py="md" px="xl" miw="40%" className={classes.form}>

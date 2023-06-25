@@ -86,7 +86,7 @@ export const LoginPage: FC = () => {
         <Text py="md">Don't have and account yet? <Text component={Link} to='/signup' sx={{ color: theme.colors.purple[4], cursor: "pointer" }}>Sign Up</Text></Text>
       </Flex>
       <Box className={classes.img}>
-        <Image src="/public/images/move_wallpaper.jpg" height="100vh" alt="img"/>
+        <Image src="/images/move_wallpaper.jpg" height="100vh" alt="img"/>
       </Box>
     </Group>
   )
