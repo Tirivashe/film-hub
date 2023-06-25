@@ -1,8 +1,9 @@
 import { Box, Button, Divider, Flex, Group, Image, Paper, Text, TextInput, Title, useMantineTheme } from '@mantine/core'
 import { FC, useState } from 'react'
 import { useStyles } from './signup.styles'
-import { IconBrandGoogle, IconInfoCircle } from '@tabler/icons-react'
+import { IconBrandGoogle, IconCheck, IconInfoCircle } from '@tabler/icons-react'
 import { Link } from 'react-router-dom'
+import { notifications } from '@mantine/notifications';
 import { supabase } from '../../api/supabase'
 import { AuthError } from '@supabase/supabase-js'
 
@@ -37,7 +38,14 @@ export const SignupPage: FC = () => {
         return
       }
       setLoading(false)
-      alert("Confirm your email address")
+      notifications.show({
+        withCloseButton: true,
+        autoClose: 4000,
+        title: "Link sent!",
+        message: 'Check your email to verify your email address',
+        color: 'primary',
+        
+      });
       
     } catch (err) {
       setLoading(false)
