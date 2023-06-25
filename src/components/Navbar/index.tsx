@@ -4,21 +4,17 @@ import { useStyles } from "./styles"
 import { useStore } from "../../store"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { User } from "@supabase/supabase-js"
 import { FC } from "react"
 import { LoggedInUser } from "../User"
 
-type Props = {
-  user?: User | null
-}
-
-const Navbar: FC<Props> = ({ user }) => {
+const Navbar: FC = () => {
   const { isError, data } = useFetchGenres()
   const { classes } = useStyles()
-  const toggleNav = useStore(state => state.toggleNav)
   const open = useStore(state => state.isNavOpen)
   const [active, setActive] = useState("")
   const navigate = useNavigate()
+  const user = useStore(state => state.user)
+  const toggleNav = useStore(state => state.toggleNav)
   const clearQuery = useStore(state => state.clearQuery)
  
   const showMoviesInGenre = (genreId: string, genreName: string) => {

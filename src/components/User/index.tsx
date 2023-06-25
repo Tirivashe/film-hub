@@ -12,7 +12,7 @@ type Props = {
 export const LoggedInUser:FC<Props> = ({ user }) => {
   const theme = useMantineTheme();
   const setToken = useStore(state => state.setToken)
-
+  const setUser = useStore(state => state.setUser)
   const initials = user?.user_metadata["full_name"].split(" ").map((n: string) => n[0]).join("")
 
   const logOutUser = async () => {
@@ -20,6 +20,7 @@ export const LoggedInUser:FC<Props> = ({ user }) => {
       const { error } = await supabase.auth.signOut()
       if(error) throw error
       setToken(null)
+      setUser(null)
     } catch (err) {
       alert(err)
     }

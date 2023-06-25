@@ -6,12 +6,12 @@ import Navbar from '../../components/Navbar'
 import { SearchResults } from '../search'
 import { useStore } from '../../store'
 import { useStyles } from './appshell.styles'
-import { User } from '@supabase/supabase-js'
 import { supabase } from '../../api/supabase'
 
 export const HomePage: FC = () => {
   const setToken = useStore(state => state.setToken)
-  const [user, setUser] = useState<User | null>(null)
+  const setUser = useStore(state => state.setUser)
+  
   const query = useStore(state => state.query)
   const { classes } = useStyles()
 
@@ -28,11 +28,11 @@ export const HomePage: FC = () => {
     }
     getUserSession()
 
-  }, [setToken])
+  }, [setToken, setUser])
 
   return (
     <AppShell
-      navbar={<Navbar user={user}/>}
+      navbar={<Navbar />}
       header={<Header />}
       navbarOffsetBreakpoint="md"
       className={classes.root}
