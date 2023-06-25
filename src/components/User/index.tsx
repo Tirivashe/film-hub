@@ -53,7 +53,7 @@ export const LoggedInUser:FC<Props> = ({ user }) => {
             <Group>
               <Avatar
                 color='primary'
-                src={null}
+                src={ user?.user_metadata["avatar_url"] || null}
                 radius="xl"
               >
                 { initials }
