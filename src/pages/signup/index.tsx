@@ -46,7 +46,7 @@ export const SignupPage: FC = () => {
         email: formData.email,
         password: formData.password,
         options: {
-          // emailRedirectTo: 'https://shamhu-film-hub.vercel.app/login',
+          emailRedirectTo: '/login',
           data: {
             full_name: formData.fullName
           }
