@@ -19,15 +19,23 @@ export const LoginPage: FC = () => {
   const [error, setError] = useState<AuthError | null>(null)
   const [loading, setLoading] = useState(false)
 
-  // const loginWithGoogle = async () => {
-  //   const { data, error } = await supabase.auth.signInWithOAuth({
-  //     provider: 'google',
-  //     options: {
-  //       redirectTo: 'https://iiasjiaxktrfutvrfupx.supabase.co/auth/v1/callback'
-  //     }
-  //   })
-  //   console.log(data, error)
-  // }
+  const loginWithGoogle = async () => {
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: 'https://shamhu-film-hub.vercel.app/',
+        }
+      })
+      if(error) {
+        setError(error)
+        return
+      }
+      setToken(data.url)
+    } catch (err) {
+      alert(err)
+    }
+  }
 
   async function signInWithEmail(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -67,7 +75,7 @@ export const LoginPage: FC = () => {
           </Group>
           <Title align='center' order={4} py="sm">Log In</Title>
           <Text align='center'>Use your work or personal email to log in</Text>
-          <Button fullWidth my="lg" leftIcon={<IconBrandGoogle color='white'/>}>Log In With Google</Button>
+          <Button fullWidth my="lg" onClick={loginWithGoogle} leftIcon={<IconBrandGoogle color='white'/>}>Log In With Google</Button>
           <Divider label="Or" labelPosition='center'/>
           <form onSubmit={signInWithEmail}>
             <TextInput onChange={handleChange} name="email" required label="Email" placeholder='yourname@yourcompany.com' type='email' variant='filled' pt="md" pb="lg" withAsterisk={false} />

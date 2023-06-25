@@ -6,9 +6,11 @@ import { Link } from 'react-router-dom'
 import { notifications } from '@mantine/notifications';
 import { supabase } from '../../api/supabase'
 import { AuthError } from '@supabase/supabase-js'
+import { useStore } from '../../store'
 
 export const SignupPage: FC = () => {
   const theme = useMantineTheme()
+  const setToken = useStore(state => state.setToken)
   const { classes } = useStyles()
   const [formData, setFormData] = useState({
     fullName: '',
@@ -18,6 +20,24 @@ export const SignupPage: FC = () => {
   const [error, setError] = useState<AuthError | null>(null)
   const [loading, setLoading] = useState(false)
 
+  const loginWithGoogle = async () => {
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: 'https://shamhu-film-hub.vercel.app/',
+        }
+      })
+      if(error) {
+        setError(error)
+        return
+      }
+      setToken(data.url)
+    } catch (err) {
+      alert(err)
+    }
+  }
+
   async function signInWithEmail(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setLoading(true)
@@ -26,7 +46,7 @@ export const SignupPage: FC = () => {
         email: formData.email,
         password: formData.password,
         options: {
-          emailRedirectTo: 'http://localhost:5173/login',
+          emailRedirectTo: 'https://shamhu-film-hub.vercel.app/login',
           data: {
             full_name: formData.fullName
           }
@@ -73,7 +93,7 @@ export const SignupPage: FC = () => {
           </Group>
           <Title align='center' order={4} py="sm">Sign Up</Title>
           <Text align='center'>Sign up with Google Account you use daily</Text>
-          <Button fullWidth my="lg" leftIcon={<IconBrandGoogle color='white'/>}>Continue With Google</Button>
+          <Button fullWidth my="lg" onClick={loginWithGoogle} leftIcon={<IconBrandGoogle color='white'/>}>Continue With Google</Button>
           <Divider label="Or" labelPosition='center'/>
           <form onSubmit={signInWithEmail}>
             <TextInput onChange={handleChange} name="fullName" required label="Full Name" placeholder='Enter your full name' variant='filled' pt="sm" pb="md" withAsterisk={false} />
