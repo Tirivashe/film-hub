@@ -21,7 +21,7 @@ export const WelcomePage: FC = () => {
 
   return (
       <>
-        <BackgroundImage src="/public/images/move_wallpaper.jpg" w="100%" h="100vh" className={classes.bgImg}>
+        <BackgroundImage src="/images/move_wallpaper.jpg" w="100%" h="100vh" className={classes.bgImg}>
           <Group pos="absolute" top={0} left={0} w="100%" p="lg" mt="sm" position="apart">
            {/* <Logo /> */}
            <Title
@@ -138,7 +138,7 @@ export const WelcomePage: FC = () => {
             { maxWidth: "md", cols: 1 }
           ]}>
           <Group position="center">
-            <Image src="/public/ethereum.svg" maw="100px" mah="200px"/>
+            <Image src="/ethereum.svg" maw="100px" mah="200px"/>
           </Group>
           <Stack align="center" justify="center">
             <Title align="center" order={1}>Buy Or Rent The Movie You Love</Title>
