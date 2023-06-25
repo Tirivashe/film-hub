@@ -80,7 +80,7 @@ export const WelcomePage: FC = () => {
             <Text align="center">Watch on Smart TVs, Playstation, Xbox, Chromecast, Apple TV, Blu-ray players, and more</Text>
           </Stack>
           <Group position="center">
-            <Image src="/public/images/couple.jpg" maw="500px" mah="300px"/>
+            <Image src="/images/couple.jpg" maw="500px" mah="300px"/>
           </Group>
         </SimpleGrid>
         { !isError && (
