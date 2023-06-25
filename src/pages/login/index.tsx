@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Flex, Group, Image, Paper, Text, TextInput, Title, useMantineTheme } from '@mantine/core'
+import { Box, Button, Divider, Flex, Group, Image, LoadingOverlay, Paper, Text, TextInput, Title, useMantineTheme } from '@mantine/core'
 import { FC, useState } from 'react'
 import { useStyles } from './login.styles'
 import { IconBrandGoogle, IconInfoCircle } from '@tabler/icons-react'
@@ -20,6 +20,7 @@ export const LoginPage: FC = () => {
   const [loading, setLoading] = useState(false)
 
   const loginWithGoogle = async () => {
+    setLoading(true)
     try {
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
@@ -34,6 +35,8 @@ export const LoginPage: FC = () => {
       setToken(data.url)
     } catch (err) {
       alert(err)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -47,14 +50,14 @@ export const LoginPage: FC = () => {
       })
       if(error) {
         setError(error)
-        setLoading(false)
         return
       }
-      setLoading(false)
       setToken(data.session.access_token)
       navigate("/")
     } catch (err) {
       alert(err)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -69,7 +72,8 @@ export const LoginPage: FC = () => {
   return (
     <Group spacing={0} h="100vh" grow position='center' align='center'>
       <Flex justify="center" align="center" direction="column">
-        <Paper shadow='xl' radius="md" py="md" px="xl" miw="40%" className={classes.form}>
+        <Paper shadow='xl' radius="md" py="md" px="xl" miw="40%" pos="relative" className={classes.form}>
+          <LoadingOverlay visible={loading} overlayBlur={2} overlayOpacity={0.3} sx={theme => ({ borderRadius: theme.radius.md })}/>
           <Group position='center' mt="xs">
             <IconInfoCircle color={theme.colors.purple[4]} size="2rem"/>
           </Group>
@@ -80,7 +84,7 @@ export const LoginPage: FC = () => {
           <form onSubmit={signInWithEmail}>
             <TextInput onChange={handleChange} name="email" required label="Email" placeholder='yourname@yourcompany.com' type='email' variant='filled' pt="md" pb="lg" withAsterisk={false} />
             <TextInput error={error?.message} onChange={handleChange} name="password" required label="Password" placeholder='Enter your password' type='password' variant='filled' pb="lg" withAsterisk={false}/>
-            <Button type='submit' loading={loading} fullWidth>Log in</Button>
+            <Button type='submit' fullWidth>Log in</Button>
           </form>
         </Paper>
         <Text py="md">Don't have and account yet? <Text component={Link} to='/signup' sx={{ color: theme.colors.purple[4], cursor: "pointer" }}>Sign Up</Text></Text>
