@@ -14,8 +14,8 @@ const MovieDetailsPage: FC = () => {
   const { isLoading, isFetching, isError, data: movie } = useFetchMovieById(Number(id))
   const randomGenre = movie ? Math.floor(Math.random() * movie.genres.length) : 0
   const { data } = useFetchMoviesByGenres(movie ? movie.genres[randomGenre].id : "80")
+  const similarGenreMovies = data ? addMovieImage(data.pages.map(group=> group.results)[0].filter(movie => movie.id.toString() !== id)) : []
   const { classes } = useStyles()
-  const similarGenreMovies = data ? addMovieImage(data.pages.map(group=> group.results)[0]) : []
 
   const movieSubInfo = [
     { title:
