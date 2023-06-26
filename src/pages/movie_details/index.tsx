@@ -1,7 +1,7 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import { useFetchMovieById, useFetchMoviesByGenres } from '../../hooks/fetchMovies';
-import { Avatar, BackgroundImage, Badge, Breadcrumbs, Button, Grid, Group, Image, Loader, Space, Stack, Text, Title, Tooltip } from '@mantine/core';
+import { Avatar, BackgroundImage, Badge, Box, Breadcrumbs, Button, Grid, Group, Image, Loader, Skeleton, Space, Stack, Text, Title, Tooltip } from '@mantine/core';
 import { useStyles } from './styles';
 import { addMovieImage, getReleaseYear } from '../../utils/util';
 import { IconStarFilled } from '@tabler/icons-react';
@@ -28,10 +28,14 @@ const MovieDetailsPage: FC = () => {
     { title: getReleaseYear(movie) }
   ]
 
+  useEffect(() => {
+    window.scrollTo(0,0)
+  })
+
   if(isLoading || isFetching) {
     return (
     <Stack justify='center' align='center' w="100%" h="100vh">
-      <Loader />
+      <LoadingSkeleton />
     </Stack>
     )
   }
@@ -59,10 +63,11 @@ const MovieDetailsPage: FC = () => {
               />
           </Grid.Col>
           <Grid.Col lg={8} md={12}>
-            <Stack spacing="md">
+            <Stack spacing="xl">
               <Group align='center'>
                 <Title>{movie?.title}</Title>
                 <Badge radius="md" color="primary">{movie?.status}</Badge>
+                { movie && movie.adult && <Badge radius="md" size='lg' color="red.2">R</Badge>}
               </Group>
               <Breadcrumbs separator="•">
                 {movieSubInfo.map((item, idx) => (
@@ -73,6 +78,13 @@ const MovieDetailsPage: FC = () => {
                 {movie?.genres.map(genre => genre.name).join(", ")}
               </Text>
               <Text w="70%">{movie?.overview}</Text>
+              { movie && !!movie.budget && !!movie.revenue && (
+                <Group>
+                  <Title order={4}>Budget / Revenue</Title>
+                  <Badge radius="md" color="gray.3">${movie.budget.toLocaleString()}</Badge>
+                  <Badge radius="md" color={ movie.budget > movie.revenue ? "red.7" : "green.4" }>${movie.revenue.toLocaleString()}</Badge>
+                </Group>
+              ) }
               <Group>
                 <Title order={4}>Available in:</Title>
                 <Text>{movie?.spoken_languages.map(language => language.english_name).join(", ")}</Text>
@@ -129,6 +141,58 @@ const MovieDetailsPage: FC = () => {
       </Group>
     </Stack>
   )
+}
+
+const LoadingSkeleton = () => {
+  const { classes } = useStyles()
+  return (
+    <Stack m="lg" className={classes.root} w="100%" h="100vh" pos="relative" p="sm">
+      <Box className={classes.bgImg}>
+        <Grid gutter="sm" p="lg" w="100%" h="auto" className={classes.grid}>
+          <Grid.Col lg={4} md={12}>
+            <Skeleton height={400} width={300} radius="lg" />
+          </Grid.Col>
+          <Grid.Col lg={8} md={12}>
+            <Stack spacing="2rem">
+              <Group align='center'>
+                <Skeleton height={20} radius="xl" />
+                <Skeleton height={8} radius="xl" />
+              </Group>
+              <Skeleton height={8} radius="xl" />
+              <Skeleton height={8} radius="xl" />
+              <Stack>
+                <Skeleton height={8} radius="xl" />
+                <Skeleton height={8} radius="xl" />
+                <Skeleton height={8} radius="xl" />
+                <Skeleton height={8} radius="xl" />
+                <Skeleton height={8} radius="xl" />
+                <Skeleton height={8} radius="xl" />
+              </Stack>
+              <Group>
+                <Skeleton height={8} radius="xl" />
+                <Skeleton height={8} radius="xl" />
+              </Group>
+              <Stack>
+                <Skeleton height={15} radius="xl" />
+                <Group spacing="xs">
+                  <Skeleton height={30} circle radius="xl" />
+                  <Skeleton height={30} circle radius="xl" />
+                  <Skeleton height={30} circle radius="xl" />
+                  <Skeleton height={30} circle radius="xl" />
+                  <Skeleton height={30} circle radius="xl" />
+                  <Skeleton height={30} circle radius="xl" />
+                  <Skeleton height={30} circle radius="xl" />
+                  <Skeleton height={30} circle radius="xl" />
+                  <Skeleton height={30} circle radius="xl" />
+                  <Skeleton height={30} circle radius="xl" />
+                </Group>
+              </Stack>
+            </Stack>
+          </Grid.Col>
+        </Grid>
+      </Box>
+    </Stack>
+  );
 }
 
 export default MovieDetailsPage
