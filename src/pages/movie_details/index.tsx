@@ -71,7 +71,7 @@ const MovieDetailsPage: FC = () => {
               </Group>
               <Breadcrumbs separator="•">
                 {movieSubInfo.map((item, idx) => (
-                  <Text key={idx} >{item.title}</Text>
+                  <Text key={idx}>{item.title}</Text>
                 ))}
               </Breadcrumbs>
               <Text>
@@ -135,7 +135,13 @@ const MovieDetailsPage: FC = () => {
         </Grid>
       </BackgroundImage>
       <Space mt={"xl"}/>
-      { similarGenreMovies.length > 0 ? <MovieList title='You May Also Like' movies={similarGenreMovies}/> : <Loader variant='dots' />}
+      { similarGenreMovies.length > 0 ? 
+        <MovieList title='You May Also Like' movies={similarGenreMovies}/> 
+        :
+        <Group position='center'>
+          <Loader variant='dots' />
+        </Group> 
+      }
       <Group align='center' position='center'>
         <Button component={Link} to="/" mt="xl" color="primary">Back Home</Button>
       </Group>
