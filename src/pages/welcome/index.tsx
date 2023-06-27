@@ -31,10 +31,7 @@ export const WelcomePage: FC = () => {
             >
             Film Hub
           </Title>
-            <Group spacing="xl">
-              <Button component={Link} to="/login" size="md" color="purple.2" variant="outline">Log In</Button>
-              <Button component={Link} to="/signup" size="md">Sign Up</Button>
-            </Group>
+            <Button component={Link} to="/login" size="md">Log In</Button>
           </Group>
           <Stack pos="relative" align="center" justify="center" spacing="sm">
             <Title align="center" order={3} variant="gradient" gradient={{ from: "purple.1", to: "purple.8", deg: 65 }}>The Film Hub</Title>
@@ -44,14 +41,13 @@ export const WelcomePage: FC = () => {
             <Title align="center" order={4}>Ready to watch? Discover your favorite movies and start browsing right now!</Title>
             <Button
               component={Link} 
-              to="/login" 
+              to="/signup" 
               rightIcon={<IconArrowRight />} 
               color="purple.5" 
               mt="lg" 
               uppercase
               sx={theme => ({
                 fontSize: theme.fontSizes.lg,
-                width: "38%",
                 height: "2.8rem",
               })}
             >
@@ -129,26 +125,10 @@ export const WelcomePage: FC = () => {
             </SimpleGrid>
           </>
         )}
-        <SimpleGrid
-          sx={{ color: "white" }} 
-          cols={2} 
-          py="8rem" 
-          px="lg" 
-          breakpoints={[
-            { maxWidth: "md", cols: 1 }
-          ]}>
-          <Group position="center">
-            <Image src="/ethereum.svg" maw="100px" mah="200px"/>
-          </Group>
-          <Stack align="center" justify="center">
-            <Title align="center" order={1}>Buy Or Rent The Movie You Love</Title>
-            <Text align="center">Enjoy your favorite movies with ethereum, the secure and decentralized way to pay</Text>
-          </Stack>
-        </SimpleGrid>
         <Stack justify="center" align="center" py="10rem" px="lg" sx={{ color: "white" }}>
           <Title align="center">Ready To Get Started?</Title>
           <Text align="center">Start watching your favorite movies now!</Text>
-          <Button component={Link} to="/login" rightIcon={<IconArrowRight />}>Get Started</Button>
+          <Button component={Link} to="/signup" rightIcon={<IconArrowRight />}>Get Started</Button>
         </Stack>
       </>
   )
