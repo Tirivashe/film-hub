@@ -6,9 +6,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../../api/supabase'
 import { AuthError } from '@supabase/supabase-js'
 import { useStore } from '../../store'
+import { useMediaQuery } from '@mantine/hooks'
 
 export const LoginPage: FC = () => {
   const theme = useMantineTheme()
+  const matches = useMediaQuery('(min-width: 50em)');
   const { classes } = useStyles()
   const [formData, setFormData] = useState({
     email: '',
@@ -70,9 +72,9 @@ export const LoginPage: FC = () => {
   }
 
   return (
-    <Group spacing={0} h="100vh" grow position='center' align='center'>
+    <Group spacing={0} h="100vh" grow position='center' align='center' px="md">
       <Flex justify="center" align="center" direction="column">
-        <Paper shadow='xl' radius="md" py="md" px="xl" miw="40%" pos="relative" className={classes.form}>
+        <Paper shadow='xl' radius="md" py="md" px="xl" maw="100%" pos="relative" className={classes.form}>
           <LoadingOverlay visible={loading} overlayBlur={2} overlayOpacity={0.3} sx={theme => ({ borderRadius: theme.radius.md })}/>
           <Group position='center' mt="xs">
             <IconInfoCircle color={theme.colors.purple[4]} size="2rem"/>
@@ -89,9 +91,11 @@ export const LoginPage: FC = () => {
         </Paper>
         <Text py="md">Don't have and account yet? <Text component={Link} to='/signup' sx={{ color: theme.colors.purple[4], cursor: "pointer" }}>Sign Up</Text></Text>
       </Flex>
+     {matches && ( 
       <Box className={classes.img}>
         <Image src="/images/move_wallpaper.jpg" height="100vh" alt="img"/>
       </Box>
+      )}
     </Group>
   )
 }

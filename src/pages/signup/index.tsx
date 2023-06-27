@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Flex, Group, Image, LoadingOverlay, Paper, Text, TextInput, Title, useMantineTheme } from '@mantine/core'
+import { Box, Button, Divider, Flex, Group, Image, LoadingOverlay, Paper, Stack, Text, TextInput, Title, useMantineTheme } from '@mantine/core'
 import { FC, useState } from 'react'
 import { useStyles } from './signup.styles'
 import { IconBrandGoogle, IconInfoCircle } from '@tabler/icons-react'
@@ -7,8 +7,10 @@ import { notifications } from '@mantine/notifications';
 import { supabase } from '../../api/supabase'
 import { AuthError } from '@supabase/supabase-js'
 import { useStore } from '../../store'
+import { useMediaQuery } from '@mantine/hooks'
 
 export const SignupPage: FC = () => {
+  const matches = useMediaQuery('(min-width: 50rem)');
   const theme = useMantineTheme()
   const setToken = useStore(state => state.setToken)
   const { classes } = useStyles()
@@ -85,12 +87,14 @@ export const SignupPage: FC = () => {
   }
 
   return (
-    <Group spacing={0} h="100vh" grow position='center' align='center'>
+    <Group spacing={0} h="100vh" grow position='center' align='center' px="md">
+      {matches && (
       <Box className={classes.img}>
         <Image src="/images/move_wallpaper.jpg" height="100vh" alt="img"/>
       </Box>
+      )}
       <Flex justify="center" align="center" direction="column">
-        <Paper shadow='xl' radius="md" py="md" px="xl" miw="40%" pos="relative" className={classes.form}>
+        <Paper shadow='xl' radius="md" py="md" px="xl" maw="100%" pos="relative" className={classes.form}>
         <LoadingOverlay visible={loading} overlayBlur={2} overlayOpacity={0.3} sx={theme => ({ borderRadius: theme.radius.md })}/>
           <Group position='center' mt="xs">
             <IconInfoCircle color={theme.colors.purple[4]} size="2rem"/>
@@ -100,10 +104,12 @@ export const SignupPage: FC = () => {
           <Button fullWidth my="lg" onClick={loginWithGoogle} leftIcon={<IconBrandGoogle color='white'/>}>Continue With Google</Button>
           <Divider label="Or" labelPosition='center'/>
           <form onSubmit={signInWithEmail}>
-            <TextInput onChange={handleChange} name="fullName" required label="Full Name" placeholder='Enter your full name' variant='filled' pt="sm" pb="md" withAsterisk={false} />
-            <TextInput onChange={handleChange} name="email" required label="Email" placeholder='yourname@yourcompany.com' type='email' variant='filled' pb="md" withAsterisk={false} />
-            <TextInput error={error?.message} onChange={handleChange} name="password" required label="Password" placeholder='Enter your password' type='password' variant='filled' pb="lg" withAsterisk={false}/>
-            <Button type='submit' fullWidth>Continue With Email</Button>
+            <Stack spacing="xs">
+              <TextInput onChange={handleChange} name="fullName" required label="Full Name" placeholder='Enter your full name' variant='filled' withAsterisk={false} />
+              <TextInput onChange={handleChange} name="email" required label="Email" placeholder='yourname@yourcompany.com' type='email' variant='filled' withAsterisk={false} />
+              <TextInput error={error?.message} onChange={handleChange} name="password" required label="Password" placeholder='Enter your password' type='password' variant='filled' withAsterisk={false}/>
+              <Button type='submit' fullWidth>Continue With Email</Button>
+            </Stack>
           </form>
         </Paper>
         <Text py="md">Already have and account? <Text component={Link} to='/login' sx={{ color: theme.colors.purple[4], cursor: "pointer" }}>Log In</Text></Text>
