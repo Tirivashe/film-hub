@@ -29,8 +29,8 @@ const MovieList: FC<Props> = ({ title, movies }) => {
         breakpoints={[
           { maxWidth: 'lg', slideSize: '25%' },
           { maxWidth: 'md', slideSize: '33.33333333333%' },
-          { maxWidth: 'sm', slideSize: '50%'},
-          { maxWidth: 'xs', slideSize: '100%'},
+          { maxWidth: '42rem', slideSize: '50%'},
+          { maxWidth: '23rem', slideSize: '100%'},
         ]}
       >
         {movies?.map(movie => (

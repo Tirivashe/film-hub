@@ -19,7 +19,7 @@ const MovieCard: FC<Props> = ({ movie, disableClick = false }) => {
       <Image 
         src={movie.poster_path} 
         width="100%"
-        height="19rem"
+        mih="10rem"
         radius="lg" 
         alt='image' 
         fit="cover"

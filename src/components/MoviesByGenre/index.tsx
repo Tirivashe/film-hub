@@ -34,8 +34,8 @@ const MoviesByGenre: FC<Props> = ({ genreId, genre }) => {
         verticalSpacing="3rem"
         breakpoints={[
           { maxWidth: "lg", cols: 3 },
-          { maxWidth: "md", cols: 2, verticalSpacing: "xl" },
-          { maxWidth: "xs", cols: 1, verticalSpacing: "lg" },
+          { maxWidth: "40rem", cols: 2, verticalSpacing: "xl" },
+          { maxWidth: "23rem", cols: 1, verticalSpacing: "lg" },
         ]}
       >
         { data?.pages?.map(page => page.results.map(movie => (

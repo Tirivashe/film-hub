@@ -53,7 +53,7 @@ const Header = () => {
           placeholder="Search any movies..."
           variant="filled"
           icon={<IconSearch size="0.8rem"/>}
-          classNames={{ input: classes.input }}
+          classNames={{ input: classes.input, root: classes.root }}
         />
       </Group>
     </MantineHeader>
