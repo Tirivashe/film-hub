@@ -77,7 +77,7 @@ const MovieDetailsPage: FC = () => {
               <Text>
                 {movie?.genres.map(genre => genre.name).join(", ")}
               </Text>
-              <Text w="70%">{movie?.overview}</Text>
+              <Text>{movie?.overview}</Text>
               { movie && !!movie.budget && !!movie.revenue && (
                 <Group>
                   <Title order={4}>Budget / Revenue</Title>
